@@ -1,12 +1,7 @@
-import { IssueCtxProvider } from "../../context/IssueContext";
 import IssueList from "./IssueList";
 
 const Home = () => {
-  return (
-    <IssueCtxProvider>
-      <IssueList />
-    </IssueCtxProvider>
-  );
+  return <IssueList />;
 };
 
 export default Home;
