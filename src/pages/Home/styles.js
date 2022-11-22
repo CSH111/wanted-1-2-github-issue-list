@@ -33,7 +33,9 @@ export const List = styled.ul`
   .spinner-sub {
     align-self: center;
     font-size: 40px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
+    position: fixed;
+    bottom: 10%;
   }
 `;
 

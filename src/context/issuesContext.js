@@ -8,23 +8,27 @@ const IssuesDispatchContext = createContext(null);
 const IssuesReducer = (state, action) => {
   switch (action.type) {
     case "GET_ISSUES_PENDING":
-      return { ...state, status: { isLoading: true, isError: false } };
+      return { ...state, isLoading: true, isError: false };
     case "GET_ISSUES_FULFILLED":
       return {
-        issuesData: [...state.issuesData, ...action.payload],
-        status: { isLoading: false, isError: false },
+        ...state,
+        issuesData: [...state.issuesData, ...action.payload.newDataArr],
+        isLoading: false,
+        isError: false,
+        pageToRender: state.pageToRender + 1,
       };
     case "GET_ISSUES_REJECTED":
-      return { ...state, status: { isLoading: false, isError: true } };
+      return { ...state, isLoading: false, isError: true };
+    default:
+      return state;
   }
 };
 
 const initialState = {
   issuesData: [],
-  status: {
-    isLoading: true,
-    isError: false,
-  },
+  pageToRender: 1,
+  isLoading: true,
+  isError: false,
 };
 
 export const IssuesProvider = ({ children }) => {

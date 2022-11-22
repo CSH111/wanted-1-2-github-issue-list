@@ -4,7 +4,7 @@ import * as S from "./styles";
 const Header = () => {
   return (
     <S.Header>
-      <Link to="/">Angular-cli issue</Link>
+      <Link to={-1}>Angular-cli issue</Link>
     </S.Header>
   );
 };

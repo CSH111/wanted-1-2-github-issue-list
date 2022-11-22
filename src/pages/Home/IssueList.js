@@ -1,35 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import Spinner from "../../components/Spinner";
 import { useIssueSelector } from "../../context/issuesContext";
 import { useGetIssues } from "../../hooks";
-import { isEndOfPage, watchScrollStop } from "../../utils";
+import { isEndOfPage } from "../../utils";
 import AdArea from "./AdArea";
 import ErrorPage from "./ErrorPage";
 import IssueListItem from "./IssueListItem";
 import * as S from "./styles";
 
 const IssueList = () => {
-  const [pageNumber, setPageNumber] = useState(1);
-  const {
-    issuesData,
-    status: { isLoading, isError },
-  } = useIssueSelector();
+  const { issuesData, isLoading, isError, pageToRender } = useIssueSelector();
   const getIssues = useGetIssues();
 
-  const addPageNumber = () => {
-    if (isEndOfPage()) {
-      setPageNumber((num) => num + 1);
-    }
-  };
-
   useEffect(() => {
-    watchScrollStop(addPageNumber);
+    if (pageToRender === 1) {
+      getIssues();
+    }
   }, []);
 
   useEffect(() => {
-    getIssues(pageNumber);
-  }, [pageNumber]);
+    let timer;
+    const debounce = () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timer = setTimeout(() => {
+        if (isEndOfPage()) {
+          getIssues(pageToRender);
+        }
+      }, 200);
+    };
+    window.addEventListener("scroll", debounce);
+    return () => {
+      window.removeEventListener("scroll", debounce);
+    };
+  }, [pageToRender]);
 
   if (isError) {
     return <ErrorPage />;
@@ -37,7 +43,7 @@ const IssueList = () => {
 
   return (
     <S.List className="list">
-      {isLoading && pageNumber === 1 && <Spinner className="spinner-main" />}
+      {isLoading && pageToRender === 1 && <Spinner className="spinner-main" />}
       {issuesData?.map((issue, idx) => (
         <React.Fragment key={issue.id}>
           {idx === 4 && (
@@ -54,7 +60,7 @@ const IssueList = () => {
           />
         </React.Fragment>
       ))}
-      {isLoading && pageNumber > 1 && <Spinner className="spinner-sub" />}
+      {isLoading && pageToRender !== 1 && <Spinner className="spinner-sub" />}
     </S.List>
   );
 };
