@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import Spinner from "../../components/Spinner";
 import { useIssueSelector } from "../../context/issuesContext";
-import { useGetIssues } from "../../hooks";
+import { useGetIssues, useInfiniteScroll } from "../../hooks";
 import { isEndOfPage } from "../../utils";
 import AdArea from "./AdArea";
 import ErrorPage from "./ErrorPage";
@@ -19,22 +19,8 @@ const IssueList = () => {
     }
   }, []);
 
-  useEffect(() => {
-    let timer;
-    const debounce = () => {
-      if (timer) {
-        clearTimeout(timer);
-      }
-      timer = setTimeout(() => {
-        if (isEndOfPage()) {
-          getIssues(pageToRender);
-        }
-      }, 200);
-    };
-    window.addEventListener("scroll", debounce);
-    return () => {
-      window.removeEventListener("scroll", debounce);
-    };
+  useInfiniteScroll(() => {
+    getIssues(pageToRender);
   }, [pageToRender]);
 
   if (isError) {
