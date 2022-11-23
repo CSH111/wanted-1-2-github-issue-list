@@ -4,6 +4,7 @@ import { isEndOfPage } from "../utils";
 
 const useInfiniteScroll = (callback, deps = []) => {
   useEffect(() => {
+    const delayTime = 200;
     let timer;
     const debounce = () => {
       if (timer) {
@@ -13,7 +14,7 @@ const useInfiniteScroll = (callback, deps = []) => {
         if (isEndOfPage()) {
           callback();
         }
-      }, 200);
+      }, delayTime);
     };
     window.addEventListener("scroll", debounce);
     return () => {

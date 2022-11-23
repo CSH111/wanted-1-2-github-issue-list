@@ -23,7 +23,6 @@ const useGetIssues = () => {
         comments: obj.comments,
         id: obj.id,
       }));
-      // console.log("new", newDataArr);
       dispatch({ type: "GET_ISSUES_FULFILLED", payload: { newDataArr } });
     } catch (err) {
       dispatch({ type: "GET_ISSUES_REJECTED" });

@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import Spinner from "../../components/Spinner";
 import { useIssueSelector } from "../../context/issuesContext";
 import { useGetIssues, useInfiniteScroll } from "../../hooks";
-import { isEndOfPage } from "../../utils";
 import AdArea from "./AdArea";
 import ErrorPage from "./ErrorPage";
 import IssueListItem from "./IssueListItem";
@@ -12,6 +11,7 @@ import * as S from "./styles";
 const IssueList = () => {
   const { issuesData, isLoading, isError, pageToRender } = useIssueSelector();
   const getIssues = useGetIssues();
+  const isAdTurn = (idx) => idx > 0 && idx % 6 === 0;
 
   useEffect(() => {
     if (pageToRender === 1) {
@@ -32,8 +32,8 @@ const IssueList = () => {
       {isLoading && pageToRender === 1 && <Spinner className="spinner-main" />}
       {issuesData?.map((issue, idx) => (
         <React.Fragment key={issue.id}>
-          {idx === 4 && (
-            <a href="https://www.wanted.co.kr/" target="_blank" rel="noreferrer">
+          {isAdTurn(idx) && (
+            <a href="https://www.wanted.co.kr/" target="_blank" rel="noopener noreferrer">
               <AdArea key={123} />
             </a>
           )}
