@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 
-import Spinner from "../../components/Spinner";
-import { useGetIssueDetail } from "../../hooks";
-import CommentListItem from "./CommentListItem";
-import ErrorPage from "./ErrorPage";
-import * as S from "./styles";
+import CommentListItem from "../components/Detail/CommentListItem";
+import ErrorPage from "../components/Detail/ErrorPage";
+import * as S from "../components/Detail/styles";
+import Spinner from "../components/Spinner";
+import { useGetIssueDetail } from "../hooks";
 
 const Detail = () => {
   const { issueNumber } = useParams();

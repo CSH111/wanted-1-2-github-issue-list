@@ -1,4 +1,4 @@
-import IssueList from "./IssueList";
+import { IssueList } from "../components/Home";
 
 const Home = () => {
   return <IssueList />;

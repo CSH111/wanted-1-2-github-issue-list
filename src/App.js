@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Layout } from "./components/Layout";
-import { Home } from "./pages";
-import { Detail } from "./pages/Detail";
+import { Detail, Home } from "./pages";
 
 function App() {
   // console.log(process.env.REACT_APP_API_KEY);
