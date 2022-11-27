@@ -4,11 +4,11 @@ import CommentListItem from "../components/Detail/CommentListItem";
 import ErrorPage from "../components/Detail/ErrorPage";
 import * as S from "../components/Detail/styles";
 import Spinner from "../components/Spinner";
-import { useGetIssueDetail } from "../hooks";
+import { useIssueDetail } from "../hooks";
 
 const Detail = () => {
   const { issueNumber } = useParams();
-  const { mainData, commentsData, isError, isLoading } = useGetIssueDetail(issueNumber);
+  const { mainData, commentsData, isError, isLoading } = useIssueDetail(issueNumber);
 
   if (isError) {
     return <ErrorPage />;

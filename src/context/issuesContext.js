@@ -31,7 +31,7 @@ const initialState = {
   isError: false,
 };
 
-export const IssuesProvider = ({ children }) => {
+export const Provider = ({ children }) => {
   const [state, dispatch] = useReducer(IssuesReducer, initialState);
   return (
     <IssuesContext.Provider value={state}>
@@ -40,5 +40,7 @@ export const IssuesProvider = ({ children }) => {
   );
 };
 
-export const useIssueSelector = () => useContext(IssuesContext);
-export const useIssuesDispatch = () => useContext(IssuesDispatchContext);
+export const useSelector = () => useContext(IssuesContext);
+export const useDispatch = () => useContext(IssuesDispatchContext);
+
+// 여기서 혹은 다른 전역상태에서 service, http 등 빼서쓸수있게끔?

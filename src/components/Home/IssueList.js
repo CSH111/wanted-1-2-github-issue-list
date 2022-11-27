@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import Spinner from "../../components/Spinner";
-import { useIssueSelector } from "../../context/issuesContext";
+import { Issue } from "../../context";
 import { useGetIssues, useInfiniteScroll } from "../../hooks";
 import AdArea from "./AdArea";
 import ErrorPage from "./ErrorPage";
@@ -9,7 +9,7 @@ import IssueListItem from "./IssueListItem";
 import * as S from "./styles";
 
 const IssueList = () => {
-  const { issuesData, isLoading, isError, pageToRender } = useIssueSelector();
+  const { issuesData, isLoading, isError, pageToRender } = Issue.useSelector();
   const getIssues = useGetIssues();
   const isAdTurn = (idx) => idx > 0 && idx % 6 === 0;
 

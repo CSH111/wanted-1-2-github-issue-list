@@ -1,20 +1,14 @@
-import axios from "axios";
-
-import { useIssuesDispatch } from "../context/issuesContext";
+import { Issue } from "../context";
+import { useService } from "../context/serviceContext";
 
 const useGetIssues = () => {
-  const dispatch = useIssuesDispatch();
-  const getIssue = async (pageToRender) => {
+  const dispatch = Issue.useDispatch();
+  const { getIssues } = useService();
+
+  return async (pageToRender) => {
     dispatch({ type: "GET_ISSUES_PENDING" });
     try {
-      const res = await axios.get(
-        `https://api.github.com/repos/angular/angular-cli/issues?sort=comments&per_page=8&page=${pageToRender}`,
-        {
-          headers: {
-            Authorization: "token" + process.env.REACT_APP_API_KEY,
-          },
-        }
-      );
+      const res = await getIssues(pageToRender);
       const newDataArr = res.data.map((obj) => ({
         date: obj.created_at.split("T")[0],
         title: obj.title,
@@ -28,8 +22,6 @@ const useGetIssues = () => {
       dispatch({ type: "GET_ISSUES_REJECTED" });
     }
   };
-
-  return getIssue;
 };
 
 export default useGetIssues;

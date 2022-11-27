@@ -1,6 +1,7 @@
-import axios from "axios";
 import { useReducer } from "react";
 import { useEffect } from "react";
+
+import { useService } from "../context/serviceContext";
 
 const initialState = {
   isLoading: true,
@@ -22,29 +23,19 @@ const issueDetailReducer = (state, { type, payload: { mainData, commentsData } =
   }
 };
 
-const useGetIssueDetail = (issueNumber) => {
+const useIssueDetail = (issueNumber) => {
   const [issueDetail, dispatch] = useReducer(issueDetailReducer, initialState);
-  useEffect(() => {
-    dispatch({ type: "GET_ISSUE_DETAIL_PENDING" });
-    const mainRespones = axios.get(
-      `https://api.github.com/repos/angular/angular-cli/issues/${issueNumber}`,
-      {
-        headers: {
-          Authorization: "token" + process.env.REACT_APP_API_KEY,
-        },
-      }
-    );
-    const commentResponse = axios.get(
-      `https://api.github.com/repos/angular/angular-cli/issues/${issueNumber}/comments`,
-      {
-        headers: {
-          Authorization: "token" + process.env.REACT_APP_API_KEY,
-        },
-      }
-    );
+  const { getIssueDetail, getIssueComments } = useService();
 
-    Promise.all([mainRespones, commentResponse]) //
-      .then(([main, comments]) => {
+  useEffect(() => {
+    (async () => {
+      dispatch({ type: "GET_ISSUE_DETAIL_PENDING" });
+
+      const mainRespones = getIssueDetail(issueNumber);
+      const commentResponse = getIssueComments(issueNumber);
+
+      try {
+        const [main, comments] = await Promise.all([mainRespones, commentResponse]);
         dispatch({
           type: "GET_ISSUE_DETAIL_FULLFILLED",
           payload: {
@@ -52,13 +43,13 @@ const useGetIssueDetail = (issueNumber) => {
             commentsData: comments.data,
           },
         });
-      })
-      .catch(() => {
+      } catch (err) {
         dispatch("GET_ISSUE_DETAIL_REJECTED");
-      });
+      }
+    })();
   }, []);
 
   return issueDetail;
 };
 
-export default useGetIssueDetail;
+export default useIssueDetail;
