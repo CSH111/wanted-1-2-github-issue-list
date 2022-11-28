@@ -6,11 +6,11 @@ import { useService } from "../context/serviceContext";
 const initialState = {
   isLoading: true,
   isError: false,
-  // mainData: {},
   commentsData: [],
 };
 
 const issueDetailReducer = (state, { type, payload: { mainData, commentsData } = {} }) => {
+  // console.log(state);
   switch (type) {
     case "GET_ISSUE_DETAIL_PENDING":
       return { ...state, isLoading: true, isError: false };
@@ -49,13 +49,12 @@ const useIssueDetail = (issueNumber) => {
           },
         });
       } catch (err) {
-        dispatch("GET_ISSUE_DETAIL_REJECTED");
+        dispatch({ type: "GET_ISSUE_DETAIL_REJECTED" });
       }
     })();
   }, []);
 
   return issueDetail;
-  // return {};
 };
 
 export default useIssueDetail;

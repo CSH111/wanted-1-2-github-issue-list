@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
-import CommentListItem from "../components/Detail/CommentListItem";
-import ErrorPage from "../components/Detail/ErrorPage";
+import { ErrorPage } from "../components/common";
+import { CommentList, CommentListItem, DetailHeader } from "../components/Detail";
 import * as S from "../components/Detail/styles";
 import Spinner from "../components/Spinner";
 import { useIssueDetail } from "../hooks";
@@ -11,39 +11,37 @@ const Detail = () => {
   const { issueNumber } = useParams();
   const { commentsData, isError, isLoading } = useIssueDetail(issueNumber);
   const [mainComment] = commentsData;
-
+  console.log(isError);
   if (isError) {
-    return <ErrorPage />;
+    return (
+      <ErrorPage>
+        <Link to={0}>retry</Link>
+      </ErrorPage>
+    );
   }
   return (
     <S.PageContainer>
-      {isLoading ? (
-        <Spinner className="spinner" />
-      ) : (
+      {isLoading && <Spinner className="spinner" />}
+      {!isLoading && (
         <>
-          <S.Header>
-            <h2>
-              {mainComment.title} #{issueNumber}
-            </h2>
-            <div className="meta">
-              <div>
-                {deleteISOTime(mainComment.created_at)} opened by {mainComment.user.login}.
-              </div>
-              <div>{mainComment.comments} comments</div>
-            </div>
-          </S.Header>
-
-          <S.List>
-            {commentsData.map((obj) => (
+          <DetailHeader
+            title={mainComment.title}
+            date={deleteISOTime(mainComment.created_at)}
+            user={mainComment.user.login}
+            commentsNumber={mainComment.comments}
+            issueNumber={issueNumber}
+          />
+          <CommentList>
+            {commentsData.map((comment) => (
               <CommentListItem
-                key={obj.id}
-                user={obj.user.login}
-                avatar={obj.user.avatar_url}
-                date={deleteISOTime(obj.created_at)}
-                body={obj.body}
+                key={comment.id}
+                user={comment.user.login}
+                avatar={comment.user.avatar_url}
+                date={deleteISOTime(comment.created_at)}
+                body={comment.body}
               />
             ))}
-          </S.List>
+          </CommentList>
         </>
       )}
     </S.PageContainer>

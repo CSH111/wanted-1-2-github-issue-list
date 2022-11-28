@@ -1,2 +1,4 @@
+export { default as CommentList } from "./CommentList";
 export { default as CommentListItem } from "./CommentListItem";
-export { default as ErrorPagel } from "./ErrorPage";
+export { default as DetailHeader } from "./DetailHeader";
+export { default as ErrorPage } from "./ErrorPage";
