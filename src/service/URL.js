@@ -1,3 +1,3 @@
 export const URL = {
-  API: "https://api.github.com/repos/angular/angular-cli/issues",
+  API: "https://api.github.com/repos/facebook/react-native/issues",
 };

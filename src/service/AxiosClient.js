@@ -6,7 +6,7 @@ class AxiosClient {
     this.#axiosInstance = axios.create({
       baseURL: baseURL,
       headers: {
-        Authorization: "token" + process.env.REACT_APP_API_KEY,
+        Authorization: process.env.REACT_APP_API_KEY,
       },
     });
   }

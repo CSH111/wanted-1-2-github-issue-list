@@ -11,10 +11,11 @@ const Detail = () => {
   const { issueNumber } = useParams();
   const { commentsData, isError, isLoading } = useIssueDetail(issueNumber);
   const [mainComment] = commentsData;
-  console.log(isError);
   if (isError) {
     return (
       <ErrorPage>
+        <Link to="/">Home</Link>
+        <br />
         <Link to={0}>retry</Link>
       </ErrorPage>
     );

@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const client = new AxiosClient(URL.API);
 const issueService = createIssueService(client);
-
+console.log(process.env.REACT_APP_API_KEY);
 root.render(
   // <React.StrictMode>
   <Service.Provider services={issueService}>

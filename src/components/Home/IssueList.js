@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import Spinner from "../../components/Spinner";
 import { Issue } from "../../context";
 import { useGetIssues, useInfiniteScroll } from "../../hooks";
+import { ErrorPage } from "../common";
 import AdArea from "./AdArea";
-import ErrorPage from "./ErrorPage";
 import IssueListItem from "./IssueListItem";
 import * as S from "./styles";
 
@@ -24,7 +25,11 @@ const IssueList = () => {
   }, [pageToRender]);
 
   if (isError) {
-    return <ErrorPage />;
+    return (
+      <ErrorPage>
+        <Link to="/">retry</Link>
+      </ErrorPage>
+    );
   }
 
   return (
