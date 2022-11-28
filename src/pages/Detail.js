@@ -1,9 +1,8 @@
 import { Link, useParams } from "react-router-dom";
 
-import { ErrorPage } from "../components/common";
+import { ErrorPage, Spinner } from "../components/common";
 import { CommentList, CommentListItem, DetailHeader } from "../components/Detail";
 import * as S from "../components/Detail/styles";
-import Spinner from "../components/Spinner";
 import { useIssueDetail } from "../hooks";
 import { deleteISOTime } from "../utils";
 
@@ -11,6 +10,7 @@ const Detail = () => {
   const { issueNumber } = useParams();
   const { commentsData, isError, isLoading } = useIssueDetail(issueNumber);
   const [mainComment] = commentsData;
+
   if (isError) {
     return (
       <ErrorPage>
