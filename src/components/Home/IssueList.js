@@ -11,7 +11,7 @@ import * as S from "./styles";
 const IssueList = () => {
   const { issuesData, isLoading, isError, pageToRender } = Issue.useSelector();
   const getIssues = useGetIssues();
-  const isAdTurn = (idx) => idx > 0 && idx % 6 === 0;
+  const isAdTurn = (idx) => idx > 0 && idx % 5 === 0;
 
   useEffect(() => {
     if (pageToRender === 1) {
@@ -30,13 +30,8 @@ const IssueList = () => {
   return (
     <S.List className="list">
       {isLoading && pageToRender === 1 && <Spinner className="spinner-main" />}
-      {issuesData?.map((issue, idx) => (
+      {issuesData.map((issue, idx) => (
         <React.Fragment key={issue.id}>
-          {isAdTurn(idx) && (
-            <a href="https://www.wanted.co.kr/" target="_blank" rel="noopener noreferrer">
-              <AdArea key={123} />
-            </a>
-          )}
           <IssueListItem
             title={issue.title}
             user={issue.user}
@@ -44,6 +39,11 @@ const IssueList = () => {
             number={issue.number}
             comments={issue.comments}
           />
+          {isAdTurn(idx) && (
+            <a href="https://www.wanted.co.kr/" target="_blank" rel="noopener noreferrer">
+              <AdArea key={123} />
+            </a>
+          )}
         </React.Fragment>
       ))}
       {isLoading && pageToRender !== 1 && <Spinner className="spinner-sub" />}

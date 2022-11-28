@@ -6,20 +6,20 @@ import App from "./App";
 import GlobalStyles from "./components/GlobalStyles";
 import { Issue, Service } from "./context";
 import AxiosClient from "./service/AxiosClient";
-import { createIssueService, IssueService } from "./service/IssueService";
+import { createIssueService } from "./service/IssueService";
 import { URL } from "./service/URL";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const client = new AxiosClient(URL.api);
-// const issueService = new IssueService(client);
+
+const client = new AxiosClient(URL.API);
 const issueService = createIssueService(client);
 
 root.render(
   // <React.StrictMode>
   <Service.Provider services={issueService}>
     <Issue.Provider>
+      <GlobalStyles />
       <Router>
-        <GlobalStyles />
         <App />
       </Router>
     </Issue.Provider>

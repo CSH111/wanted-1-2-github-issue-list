@@ -2,7 +2,7 @@ import axios from "axios";
 
 class AxiosClient {
   #axiosInstance;
-  constructor(baseURL = "https://api.github.com/repos/angular/angular-cli/issues") {
+  constructor(baseURL) {
     this.#axiosInstance = axios.create({
       baseURL: baseURL,
       headers: {
@@ -11,8 +11,8 @@ class AxiosClient {
     });
   }
 
-  async get(endPoint, rest) {
-    return this.#axiosInstance.get(endPoint, rest);
+  async get(endPoint, options) {
+    return this.#axiosInstance.get(endPoint, options);
   }
 }
 

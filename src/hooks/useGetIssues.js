@@ -1,5 +1,6 @@
 import { Issue } from "../context";
 import { useService } from "../context/serviceContext";
+import { deleteISOTime } from "../utils";
 
 const useGetIssues = () => {
   const dispatch = Issue.useDispatch();
@@ -9,14 +10,16 @@ const useGetIssues = () => {
     dispatch({ type: "GET_ISSUES_PENDING" });
     try {
       const res = await getIssues(pageToRender);
+
       const newDataArr = res.data.map((obj) => ({
-        date: obj.created_at.split("T")[0],
+        date: deleteISOTime(obj.created_at),
         title: obj.title,
         user: obj.user.login,
         number: obj.number,
         comments: obj.comments,
         id: obj.id,
       }));
+
       dispatch({ type: "GET_ISSUES_FULFILLED", payload: { newDataArr } });
     } catch (err) {
       dispatch({ type: "GET_ISSUES_REJECTED" });

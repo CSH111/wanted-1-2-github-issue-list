@@ -5,10 +5,12 @@ import ErrorPage from "../components/Detail/ErrorPage";
 import * as S from "../components/Detail/styles";
 import Spinner from "../components/Spinner";
 import { useIssueDetail } from "../hooks";
+import { deleteISOTime } from "../utils";
 
 const Detail = () => {
   const { issueNumber } = useParams();
-  const { mainData, commentsData, isError, isLoading } = useIssueDetail(issueNumber);
+  const { commentsData, isError, isLoading } = useIssueDetail(issueNumber);
+  const [mainComment] = commentsData;
 
   if (isError) {
     return <ErrorPage />;
@@ -20,31 +22,24 @@ const Detail = () => {
       ) : (
         <>
           <S.Header>
-            <h1>
-              {mainData.title} #{issueNumber}
-            </h1>
+            <h2>
+              {mainComment.title} #{issueNumber}
+            </h2>
             <div className="meta">
               <div>
-                {mainData.created_at.split("T")[0]} opened by {mainData.user.login}.
+                {deleteISOTime(mainComment.created_at)} opened by {mainComment.user.login}.
               </div>
-              <div>{mainData.comments} comments</div>
+              <div>{mainComment.comments} comments</div>
             </div>
           </S.Header>
 
           <S.List>
-            <CommentListItem
-              key={mainData.id}
-              user={mainData.user.login}
-              avatar={mainData.user.avatar_url}
-              date={mainData.created_at?.split("T")[0]}
-              body={mainData.body}
-            />
             {commentsData.map((obj) => (
               <CommentListItem
                 key={obj.id}
                 user={obj.user.login}
                 avatar={obj.user.avatar_url}
-                date={obj.created_at.split("T")[0]}
+                date={deleteISOTime(obj.created_at)}
                 body={obj.body}
               />
             ))}

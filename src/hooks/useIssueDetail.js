@@ -6,7 +6,7 @@ import { useService } from "../context/serviceContext";
 const initialState = {
   isLoading: true,
   isError: false,
-  mainData: {},
+  // mainData: {},
   commentsData: [],
 };
 
@@ -15,7 +15,12 @@ const issueDetailReducer = (state, { type, payload: { mainData, commentsData } =
     case "GET_ISSUE_DETAIL_PENDING":
       return { ...state, isLoading: true, isError: false };
     case "GET_ISSUE_DETAIL_FULLFILLED":
-      return { ...state, mainData, commentsData, isLoading: false, isError: false };
+      return {
+        ...state,
+        commentsData: [mainData, ...commentsData],
+        isLoading: false,
+        isError: false,
+      };
     case "GET_ISSUE_DETAIL_REJECTED":
       return { ...state, isLoading: false, isError: true };
     default:
@@ -50,6 +55,7 @@ const useIssueDetail = (issueNumber) => {
   }, []);
 
   return issueDetail;
+  // return {};
 };
 
 export default useIssueDetail;
