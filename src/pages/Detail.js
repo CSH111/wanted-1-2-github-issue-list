@@ -1,8 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
-import { ErrorPage, Spinner } from "../components/common";
-import { CommentList, CommentListItem, DetailHeader } from "../components/Detail";
-import * as S from "../components/Detail/styles";
+import { ErrorPage } from "../components/common";
+import { CommentList, CommentListItem, DetailHeader, Layout, Spinner } from "../components/Detail";
 import { useIssueDetail } from "../hooks";
 import { deleteISOTime } from "../utils";
 
@@ -21,7 +20,8 @@ const Detail = () => {
     );
   }
   return (
-    <S.PageContainer>
+    <Layout>
+      <Spinner className="spinner" />
       {isLoading && <Spinner className="spinner" />}
       {!isLoading && (
         <>
@@ -45,7 +45,7 @@ const Detail = () => {
           </CommentList>
         </>
       )}
-    </S.PageContainer>
+    </Layout>
   );
 };
 

@@ -6,15 +6,14 @@ import { AdArea, BottomSpinner, CenterSpinner, IssueList, IssueListItem } from "
 import { Issue } from "../context";
 import { useGetIssues, useInfiniteScroll } from "../hooks";
 import { isAdTurn } from "../utils";
-
+// 항상 스크롤이 존재하게끔 만들 수 있나? 고해상도에서 스크롤 없으면 로드불가 해결하기
 const Home = () => {
   const { issuesData, isLoading, isError, pageToRender } = Issue.useSelector();
   const getIssues = useGetIssues();
 
   useEffect(() => {
-    const initialLoadAmount = 10;
     if (pageToRender === 1) {
-      getIssues(pageToRender, initialLoadAmount);
+      getIssues(pageToRender);
     }
   }, []);
 

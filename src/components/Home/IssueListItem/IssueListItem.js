@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
-import Balloon from "./Balloon";
-import { Layout } from "./Layout";
+import { Balloon, Layout } from "./components";
 import * as S from "./styles";
 
 const IssueListItem = ({ title, user, date, number, comments }) => {
@@ -15,9 +14,9 @@ const IssueListItem = ({ title, user, date, number, comments }) => {
         }
         LeftBottom={
           <S.ListItemCard.Meta>
-            <S.ListItemCard.Meta.Number>#{number}</S.ListItemCard.Meta.Number>
-            <S.ListItemCard.Meta.Date>opened on {date}</S.ListItemCard.Meta.Date>
-            <S.ListItemCard.Meta.User>by {user}</S.ListItemCard.Meta.User>
+            <S.ListItemCard.Meta.Data>#{number}</S.ListItemCard.Meta.Data>
+            <S.ListItemCard.Meta.Data>opened on {date}</S.ListItemCard.Meta.Data>
+            <S.ListItemCard.Meta.Data>by {user}</S.ListItemCard.Meta.Data>
           </S.ListItemCard.Meta>
         }
         Right={

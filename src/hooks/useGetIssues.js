@@ -5,11 +5,12 @@ import { deleteISOTime } from "../utils";
 const useGetIssues = () => {
   const dispatch = Issue.useDispatch();
   const { getIssues } = useService();
+  const issueAmount = 10;
 
-  return async (pageToRender = 1, loadAmount = 8) => {
+  return async (pageToRender = 1) => {
     dispatch({ type: "GET_ISSUES_PENDING" });
     try {
-      const res = await getIssues(pageToRender, loadAmount);
+      const res = await getIssues(pageToRender, issueAmount);
 
       const newDataArr = res.data.map((obj) => ({
         date: deleteISOTime(obj.created_at),

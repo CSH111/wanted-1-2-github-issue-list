@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { ListItemCard as Card } from "../styles";
+import { ListItemCard as OriginalListItemCard } from "../styles";
 
-export const ListItemCard = styled(Card)``;
+export const ListItemCard = styled(OriginalListItemCard)``;
 
 const Title = styled.div`
   height: 100%;
@@ -18,18 +18,14 @@ const Meta = styled.div`
 `;
 ListItemCard.Meta = Meta;
 
-const Number = styled.div`
-  margin-right: 5px;
+const Data = styled.div`
+  &:not(:last-of-type)::after {
+    content: "|";
+    margin: 0 10px;
+    color: gray;
+  }
 `;
-ListItemCard.Meta.Number = Number;
-
-const Date = styled.div`
-  margin-right: 5px;
-`;
-ListItemCard.Meta.Date = Date;
-
-const User = styled.div``;
-ListItemCard.Meta.User = User;
+ListItemCard.Meta.Data = Data;
 
 const CommentAmountArea = styled.div`
   height: 100%;
