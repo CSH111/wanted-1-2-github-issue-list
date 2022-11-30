@@ -5,8 +5,8 @@ export class IssueService {
     this.#client = httpClient;
   }
 
-  getIssues(pageToRender = 1) {
-    return this.#client.get("", { params: { sort: "comments", per_page: 8, page: pageToRender } });
+  getIssues(page, per_page) {
+    return this.#client.get("", { params: { sort: "comments", per_page, page } });
   }
   getIssueDetail(issueNumber) {
     return this.#client.get(`/${issueNumber}`);
@@ -19,8 +19,8 @@ export class IssueService {
 export const createIssueService = (httpClient) => {
   // 함수형 DI
   return {
-    getIssues(pageToRender = 1) {
-      return httpClient.get("", { params: { sort: "comments", per_page: 8, page: pageToRender } });
+    getIssues(page, per_page) {
+      return httpClient.get("", { params: { sort: "comments", per_page, page } });
     },
     getIssueDetail(issueNumber) {
       return httpClient.get(`/${issueNumber}`);

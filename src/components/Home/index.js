@@ -1,3 +1,5 @@
 export { default as AdArea } from "./AdArea";
+export { default as BottomSpinner } from "./BottomSpinner";
+export { default as CenterSpinner } from "./CenterSpinner";
 export { default as IssueList } from "./IssueList";
-export { default as IssueListItem } from "./IssueListItem";
+export { IssueListItem } from "./IssueListItem";

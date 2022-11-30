@@ -11,6 +11,7 @@ const Spinner = styled(FaSpinner)`
     }
   }
   animation: spinning 2s linear infinite;
+  font-size: ${({ size }) => size ?? "40px"};
 `;
 
 export default Spinner;

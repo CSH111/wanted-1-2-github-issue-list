@@ -1,19 +1,20 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { ErrorPage, Spinner } from "../components/common";
-import { AdArea, IssueList, IssueListItem } from "../components/Home";
+import { ErrorPage } from "../components/common";
+import { AdArea, BottomSpinner, CenterSpinner, IssueList, IssueListItem } from "../components/Home";
 import { Issue } from "../context";
 import { useGetIssues, useInfiniteScroll } from "../hooks";
+import { isAdTurn } from "../utils";
 
 const Home = () => {
   const { issuesData, isLoading, isError, pageToRender } = Issue.useSelector();
   const getIssues = useGetIssues();
-  const isAdTurn = (idx) => idx > 0 && idx % 5 === 0;
 
   useEffect(() => {
+    const initialLoadAmount = 10;
     if (pageToRender === 1) {
-      getIssues();
+      getIssues(pageToRender, initialLoadAmount);
     }
   }, []);
 
@@ -31,7 +32,7 @@ const Home = () => {
 
   return (
     <IssueList>
-      {isLoading && pageToRender === 1 && <Spinner className="spinner-main" />}
+      {isLoading && pageToRender === 1 && <CenterSpinner />}
       {issuesData.map((issue, idx) => (
         <React.Fragment key={issue.id}>
           <IssueListItem
@@ -41,14 +42,10 @@ const Home = () => {
             number={issue.number}
             comments={issue.comments}
           />
-          {isAdTurn(idx) && (
-            <a href="https://www.wanted.co.kr/" target="_blank" rel="noopener noreferrer">
-              <AdArea key={123} />
-            </a>
-          )}
+          {isAdTurn(idx) && <AdArea key={Date.now()} />}
         </React.Fragment>
       ))}
-      {isLoading && pageToRender !== 1 && <Spinner className="spinner-sub" />}
+      {isLoading && pageToRender !== 1 && <BottomSpinner />}
     </IssueList>
   );
 };

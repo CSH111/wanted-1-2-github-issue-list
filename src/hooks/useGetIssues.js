@@ -6,10 +6,10 @@ const useGetIssues = () => {
   const dispatch = Issue.useDispatch();
   const { getIssues } = useService();
 
-  return async (pageToRender) => {
+  return async (pageToRender = 1, loadAmount = 8) => {
     dispatch({ type: "GET_ISSUES_PENDING" });
     try {
-      const res = await getIssues(pageToRender);
+      const res = await getIssues(pageToRender, loadAmount);
 
       const newDataArr = res.data.map((obj) => ({
         date: deleteISOTime(obj.created_at),
