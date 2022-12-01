@@ -1,18 +1,26 @@
-import * as S from "./styles";
+import styled from "styled-components";
+
 const DetailHeader = ({ title, date, user, commentsNumber, issueNumber }) => {
   return (
-    <S.Header>
+    <header>
       <h2>
         {title} #{issueNumber}
       </h2>
-      <div className="meta">
+      <StyledMetaData>
         <div>
           {date} opened by {user}.
         </div>
         <div>{commentsNumber} comments</div>
-      </div>
-    </S.Header>
+      </StyledMetaData>
+    </header>
   );
 };
 
 export default DetailHeader;
+
+const StyledMetaData = styled.div`
+  display: flex;
+  > :first-child {
+    margin-right: 10px;
+  }
+`;

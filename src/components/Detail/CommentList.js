@@ -1,7 +1,11 @@
-import * as S from "./styles";
+import styled from "styled-components";
 
 const CommentList = ({ children }) => {
-  return <S.List>{children}</S.List>;
+  return <StyledList>{children}</StyledList>;
 };
 
 export default CommentList;
+
+const StyledList = styled.ul`
+  width: 100%;
+`;

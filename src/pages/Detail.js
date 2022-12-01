@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
 import { ErrorPage } from "../components/common";
-import { CommentList, CommentListItem, DetailHeader, Layout, Spinner } from "../components/Detail";
+import { CommentItem, CommentList, DetailHeader, Layout, Spinner } from "../components/Detail";
 import { useIssueDetail } from "../hooks";
 import { deleteISOTime } from "../utils";
 
@@ -34,7 +34,7 @@ const Detail = () => {
           />
           <CommentList>
             {commentsData.map((comment) => (
-              <CommentListItem
+              <CommentItem
                 key={comment.id}
                 user={comment.user.login}
                 avatar={comment.user.avatar_url}

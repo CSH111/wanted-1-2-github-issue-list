@@ -10,7 +10,4 @@ export const Container = styled.div`
   min-height: 100vh;
   margin: 0 auto;
   padding: 20px;
-  /* display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr; */
 `;
