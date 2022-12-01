@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import { URL, wanted_img } from "../assets/ad";
 import { ErrorPage } from "../components/common";
 import { AdItem, BottomSpinner, CenterSpinner, IssueList, IssueListItem } from "../components/Home";
 import { Issue } from "../context";
 import { useGetIssues, useInfiniteScroll } from "../hooks";
 import { isAdTurn } from "../utils";
+
 // 항상 스크롤이 존재하게끔 만들 수 있나? 고해상도에서 스크롤 없으면 로드불가 해결하기 // 의존성 배열에 함수...
 const Home = () => {
   const { issuesData, isLoading, isError, pageToRender } = Issue.useSelector();
@@ -41,7 +43,7 @@ const Home = () => {
             number={issue.number}
             comments={issue.comments}
           />
-          {isAdTurn(idx) && <AdItem />}
+          {isAdTurn(idx) && <AdItem imgSrc={wanted_img} link={URL.wanted} />}
         </React.Fragment>
       ))}
       {isLoading && pageToRender !== 1 && <BottomSpinner />}
