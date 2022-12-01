@@ -1,6 +1,8 @@
 import { FaSpinner } from "react-icons/fa";
 import styled from "styled-components";
 
+// const Spinner = styl
+
 const Spinner = styled(FaSpinner)`
   @keyframes spinning {
     from {

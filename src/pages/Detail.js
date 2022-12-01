@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
 import { ErrorPage } from "../components/common";
-import { CommentItem, CommentList, DetailHeader, Layout, Spinner } from "../components/Detail";
+import { CommentItem, CommentList, Container, DetailHeader, Spinner } from "../components/Detail";
 import { useIssueDetail } from "../hooks";
 import { deleteISOTime } from "../utils";
 
@@ -20,9 +20,8 @@ const Detail = () => {
     );
   }
   return (
-    <Layout>
-      <Spinner className="spinner" />
-      {isLoading && <Spinner className="spinner" />}
+    <Container>
+      {isLoading && <Spinner />}
       {!isLoading && (
         <>
           <DetailHeader
@@ -45,7 +44,7 @@ const Detail = () => {
           </CommentList>
         </>
       )}
-    </Layout>
+    </Container>
   );
 };
 
