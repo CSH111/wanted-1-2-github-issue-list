@@ -1,28 +1,28 @@
 import { Link } from "react-router-dom";
 
-import { Balloon, Layout } from "./components";
+import { Balloon, Container } from "./components";
 import * as S from "./styles";
 
 const IssueListItem = ({ title, user, date, number, comments }) => {
   return (
     <S.ListItemCard>
-      <Layout
+      <Container
         leftTop={
-          <S.ListItemCard.Title>
+          <S.Title>
             <Link to={`/${number}`}>{title}</Link>
-          </S.ListItemCard.Title>
+          </S.Title>
         }
         LeftBottom={
-          <S.ListItemCard.Meta>
-            <S.ListItemCard.Meta.Data>#{number}</S.ListItemCard.Meta.Data>
-            <S.ListItemCard.Meta.Data>opened on {date}</S.ListItemCard.Meta.Data>
-            <S.ListItemCard.Meta.Data>by {user}</S.ListItemCard.Meta.Data>
-          </S.ListItemCard.Meta>
+          <S.Meta>
+            <S.Data>#{number}</S.Data>
+            <S.Data>opened on {date}</S.Data>
+            <S.Data>by {user}</S.Data>
+          </S.Meta>
         }
         Right={
-          <S.ListItemCard.CommentAmountArea>
+          <S.CommentAmountArea>
             <Balloon>{comments}</Balloon>
-          </S.ListItemCard.CommentAmountArea>
+          </S.CommentAmountArea>
         }
       />
     </S.ListItemCard>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Layout = ({ leftTop, LeftBottom, Right }) => {
+const Container = ({ leftTop, LeftBottom, Right }) => {
   return (
     <StyledLayout>
       {leftTop}
@@ -10,7 +10,7 @@ const Layout = ({ leftTop, LeftBottom, Right }) => {
   );
 };
 
-export default Layout;
+export default Container;
 
 const StyledLayout = styled.div`
   padding: 15px;

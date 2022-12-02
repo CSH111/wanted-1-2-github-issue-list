@@ -4,8 +4,6 @@ import { Layout } from "./components/Layout";
 import { Detail, Home } from "./pages";
 
 function App() {
-  // console.log(process.env.REACT_APP_API_KEY);
-
   return (
     <>
       <Routes>
