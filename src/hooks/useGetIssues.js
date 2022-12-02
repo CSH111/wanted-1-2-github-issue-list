@@ -2,15 +2,16 @@ import { Issue } from "../context";
 import { useService } from "../context/serviceContext";
 import { deleteISOTime } from "../utils";
 
+const ISSUES_AMOUNT_TO_GET = 10;
+
 const useGetIssues = () => {
   const dispatch = Issue.useDispatch();
   const { getIssues } = useService();
-  const issueAmount = 10;
 
-  return async (pageToRender = 1) => {
+  return async (pageToRender = 1, sortOption = "comments") => {
     dispatch({ type: "GET_ISSUES_PENDING" });
     try {
-      const res = await getIssues(pageToRender, issueAmount);
+      const res = await getIssues(pageToRender, sortOption, ISSUES_AMOUNT_TO_GET);
 
       const newDataArr = res.data.map((obj) => ({
         date: deleteISOTime(obj.created_at),

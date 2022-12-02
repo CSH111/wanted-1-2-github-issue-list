@@ -4,7 +4,7 @@ import styled from "styled-components";
 const Header = () => {
   return (
     <StyledHeader>
-      <Link to={"/"}>React-Native issues</Link>
+      <Link to={"/"}>React issues</Link>
     </StyledHeader>
   );
 };

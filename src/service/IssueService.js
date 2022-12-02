@@ -19,8 +19,8 @@ export class IssueService {
 export const createIssueService = (httpClient) => {
   // 함수형 DI
   return {
-    getIssues(page, per_page) {
-      return httpClient.get("", { params: { sort: "comments", per_page, page } });
+    getIssues(page, sort, per_page) {
+      return httpClient.get("", { params: { sort, per_page, page } });
     },
     getIssueDetail(issueNumber) {
       return httpClient.get(`/${issueNumber}`);

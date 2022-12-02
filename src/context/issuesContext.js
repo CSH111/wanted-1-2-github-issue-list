@@ -29,6 +29,7 @@ const initialState = {
   pageToRender: 1,
   isLoading: true,
   isError: false,
+  sort: "comments",
 };
 
 export const Provider = ({ children }) => {

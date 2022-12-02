@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import * as S from "./styles";
 
@@ -11,7 +12,7 @@ const CommentItem = ({ avatar, user, date, body }) => {
         <div>{date}</div>
       </S.CommentHeader>
       <S.CommentBody>
-        <ReactMarkdown>{body}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
       </S.CommentBody>
     </S.CommentItem>
   );

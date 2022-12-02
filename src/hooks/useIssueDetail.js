@@ -10,7 +10,6 @@ const initialState = {
 };
 
 const issueDetailReducer = (state, { type, payload: { mainData, commentsData } = {} }) => {
-  // console.log(state);
   switch (type) {
     case "GET_ISSUE_DETAIL_PENDING":
       return { ...state, isLoading: true, isError: false };

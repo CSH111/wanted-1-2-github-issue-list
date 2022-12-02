@@ -23,5 +23,5 @@ export const ProfileImg = styled.img`
 
 export const CommentBody = styled.div`
   padding: 20px;
-  overflow-x: scroll;
+  overflow-x: auto;
 `;
