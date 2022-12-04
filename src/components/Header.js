@@ -1,12 +1,7 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
-  return (
-    <StyledHeader>
-      <Link to={"/"}>React issues</Link>
-    </StyledHeader>
-  );
+  return <StyledHeader>React issues</StyledHeader>;
 };
 
 export default Header;

@@ -11,7 +11,6 @@ const StyledIssueList = styled.ul`
   margin-bottom: 100px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   position: relative;
   min-height: 101vh;
 `;

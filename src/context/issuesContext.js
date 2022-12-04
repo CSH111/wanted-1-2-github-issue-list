@@ -5,18 +5,35 @@ import { createContext } from "react";
 const IssuesContext = createContext(null);
 const IssuesDispatchContext = createContext(null);
 
-const IssuesReducer = (state, action) => {
-  switch (action.type) {
+const IssuesReducer = (state, { type, payload }) => {
+  switch (type) {
     case "GET_ISSUES_PENDING":
       return { ...state, isLoading: true, isError: false };
-    case "GET_ISSUES_FULFILLED":
+    case "GET_SORT_CHANGED_ISSUES_PENDING":
+      return { ...initialState };
+    case "GET_ISSUES_FULFILLED": {
+      // const isSortOptionChanged = state.sort !== "" && state.sort !== payload?.sort;
+      // if (isSortOptionChanged) {
+      //   console.log("옵션 changed");
+      //   return {
+      //     ...state,
+      //     issuesData: [...state.issuesData, ...payload.newDataArr],
+      //     isLoading: false,
+      //     isError: false,
+      //     pageToRender: 2,
+      //     sort: payload.sort,
+      //   };
+      // }
+      // console.log(payload);
       return {
         ...state,
-        issuesData: [...state.issuesData, ...action.payload.newDataArr],
+        issuesData: [...state.issuesData, ...payload.newDataArr],
         isLoading: false,
         isError: false,
         pageToRender: state.pageToRender + 1,
+        // sort: payload.sort,
       };
+    }
     case "GET_ISSUES_REJECTED":
       return { ...state, isLoading: false, isError: true };
     default:
@@ -29,7 +46,7 @@ const initialState = {
   pageToRender: 1,
   isLoading: true,
   isError: false,
-  sort: "comments",
+  // sort: "",
 };
 
 export const Provider = ({ children }) => {

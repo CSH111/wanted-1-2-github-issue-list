@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { URL, wanted_img } from "../assets/ad";
 import { ErrorPage } from "../components/common";
@@ -13,23 +13,32 @@ import {
   IssueListItem,
 } from "../components/Home";
 import { Issue } from "../context";
-import { useGetIssues, useInfiniteScroll } from "../hooks";
+import { useGetIssues, useInfiniteScroll, useUpdateEffect } from "../hooks";
 import { isAdTurn } from "../utils";
 
-// 의존성 배열에 함수... // 필터바꿀때 리로드 하도록?ㄴㄴ
 const Home = () => {
+  const [params, setParams] = useSearchParams();
+  const sortOption = params.get("sort");
   const { issuesData, isLoading, isError, pageToRender } = Issue.useSelector();
   const getIssues = useGetIssues();
+  const firstPageNumber = 1;
 
   useEffect(() => {
-    if (pageToRender === 1) {
-      getIssues(pageToRender);
+    if (sortOption && !issuesData.length) {
+      getIssues(firstPageNumber, sortOption, true);
+      return;
     }
+    if (sortOption) return;
+    setParams({ sort: "comments" });
   }, []);
 
+  useUpdateEffect(() => {
+    getIssues(firstPageNumber, sortOption, true);
+  }, [sortOption]);
+
   useInfiniteScroll(() => {
-    getIssues(pageToRender);
-  }, [pageToRender]);
+    getIssues(pageToRender, sortOption);
+  }, [pageToRender, sortOption]);
 
   if (isError) {
     return (

@@ -16,4 +16,5 @@ export const HeaderContainer = styled.div`
 export const Main = styled.div`
   flex: 1;
   display: flex;
+  flex-direction: column;
 `;

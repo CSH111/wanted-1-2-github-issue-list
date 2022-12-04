@@ -8,8 +8,13 @@ const useGetIssues = () => {
   const dispatch = Issue.useDispatch();
   const { getIssues } = useService();
 
-  return async (pageToRender = 1, sortOption = "comments") => {
-    dispatch({ type: "GET_ISSUES_PENDING" });
+  return async (pageToRender = 1, sortOption = "comments", sortChanged) => {
+    if (!sortChanged) {
+      dispatch({ type: "GET_ISSUES_PENDING" });
+    }
+    if (sortChanged) {
+      dispatch({ type: "GET_SORT_CHANGED_ISSUES_PENDING" });
+    }
     try {
       const res = await getIssues(pageToRender, sortOption, ISSUES_AMOUNT_TO_GET);
 
@@ -22,7 +27,7 @@ const useGetIssues = () => {
         id: obj.id,
       }));
 
-      dispatch({ type: "GET_ISSUES_FULFILLED", payload: { newDataArr } });
+      dispatch({ type: "GET_ISSUES_FULFILLED", payload: { newDataArr, sort: sortOption } });
     } catch (err) {
       dispatch({ type: "GET_ISSUES_REJECTED" });
     }
