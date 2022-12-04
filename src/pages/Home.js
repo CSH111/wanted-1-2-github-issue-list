@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 
-import { URL, wanted_img } from "../assets/ad";
 import { ErrorPage } from "../components/common";
 import {
   AdItem,
@@ -65,7 +64,7 @@ const Home = () => {
               number={issue.number}
               comments={issue.comments}
             />
-            {isAdTurn(idx) && <AdItem imgSrc={wanted_img} link={URL.wanted} />}
+            {isAdTurn(idx) && <AdItem />}
           </React.Fragment>
         ))}
         {isLoading && pageToRender !== 1 && <BottomSpinner />}

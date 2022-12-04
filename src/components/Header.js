@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
 const Header = () => {
-  return <StyledHeader>React issues</StyledHeader>;
+  return (
+    <StyledHeader>
+      <h1>React issues</h1>
+    </StyledHeader>
+  );
 };
 
 export default Header;
 
 const StyledHeader = styled.header`
-  font-size: 25px;
+  h1 {
+    margin: 10px 0;
+  }
 `;

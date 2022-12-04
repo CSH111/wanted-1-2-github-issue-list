@@ -20,7 +20,6 @@ export const createIssueService = (httpClient) => {
   // 함수형 DI
   return {
     getIssues(page, sort, per_page) {
-      console.log({ page, sort, per_page });
       return httpClient.get("", { params: { sort, per_page, page } });
     },
     getIssueDetail(issueNumber) {

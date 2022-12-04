@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Balloon = styled.div`
-  background-color: #c6c6c6;
+  background-color: ${({ theme }) => theme.bgColor.midGray};
   position: relative;
   min-width: 30px;
   display: flex;
@@ -14,7 +14,7 @@ const Balloon = styled.div`
     top: 90%;
     left: 10%;
     position: absolute;
-    border-top: 10px solid #c6c6c6;
+    border-top: 10px solid ${({ theme }) => theme.bgColor.midGray};
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
   }

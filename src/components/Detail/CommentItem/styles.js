@@ -7,7 +7,7 @@ export const CommentItem = styled.li`
 `;
 
 export const CommentHeader = styled.header`
-  background-color: #c6c6c6;
+  background-color: ${({ theme }) => theme.bgColor.midGray};
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 10px 20px;
@@ -18,7 +18,9 @@ export const CommentHeader = styled.header`
 
 export const ProfileImg = styled.img`
   width: 50px;
+  height: 50px;
   border-radius: 50%;
+  background-color: ${({ theme }) => theme.bgColor.lightGray};
 `;
 
 export const CommentBody = styled.div`

@@ -7,7 +7,7 @@ const CommentItem = ({ avatar, user, date, body }) => {
   return (
     <S.CommentItem>
       <S.CommentHeader>
-        <S.ProfileImg src={`${avatar}`} />
+        <S.ProfileImg src={`${avatar}`} alt="profile" />
         <div>{user}</div>
         <div>{date}</div>
       </S.CommentHeader>

@@ -4,7 +4,7 @@ import Spinner from "../common/Spinner";
 
 const CenterSpinner = styled(Spinner)`
   position: absolute;
-  top: 50%;
+  top: 35%;
   left: 50%;
   translate: -50% -50%;
 `;

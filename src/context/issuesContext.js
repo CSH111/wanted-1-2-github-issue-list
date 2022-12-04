@@ -12,26 +12,12 @@ const IssuesReducer = (state, { type, payload }) => {
     case "GET_SORT_CHANGED_ISSUES_PENDING":
       return { ...initialState };
     case "GET_ISSUES_FULFILLED": {
-      // const isSortOptionChanged = state.sort !== "" && state.sort !== payload?.sort;
-      // if (isSortOptionChanged) {
-      //   console.log("옵션 changed");
-      //   return {
-      //     ...state,
-      //     issuesData: [...state.issuesData, ...payload.newDataArr],
-      //     isLoading: false,
-      //     isError: false,
-      //     pageToRender: 2,
-      //     sort: payload.sort,
-      //   };
-      // }
-      // console.log(payload);
       return {
         ...state,
         issuesData: [...state.issuesData, ...payload.newDataArr],
         isLoading: false,
         isError: false,
         pageToRender: state.pageToRender + 1,
-        // sort: payload.sort,
       };
     }
     case "GET_ISSUES_REJECTED":
@@ -46,7 +32,6 @@ const initialState = {
   pageToRender: 1,
   isLoading: true,
   isError: false,
-  // sort: "",
 };
 
 export const Provider = ({ children }) => {
@@ -60,5 +45,3 @@ export const Provider = ({ children }) => {
 
 export const useSelector = () => useContext(IssuesContext);
 export const useDispatch = () => useContext(IssuesDispatchContext);
-
-// 여기서 혹은 다른 전역상태에서 service, http 등 빼서쓸수있게끔?

@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
   }
   body{
       margin:0;
+      overflow-y:scroll;
     }
   ul{
     padding: 0;

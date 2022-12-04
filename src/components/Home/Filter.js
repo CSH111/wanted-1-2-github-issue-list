@@ -8,10 +8,10 @@ const Filter = () => {
     { value: SORT_PARAMETER.created, text: "최근 생성" },
     { value: SORT_PARAMETER.updated, text: "최근 업데이트" },
   ];
-
   const defaultFilterValue = selectArr[0].value;
   const [params, setParams] = useSearchParams();
   const currentFilter = params.get("sort");
+
   const handleOptionChange = ({ target: { value } }) => {
     setParams({ sort: value });
   };

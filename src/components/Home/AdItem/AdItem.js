@@ -1,10 +1,10 @@
 import * as S from "./styles";
 
-const AdItem = ({ imgSrc, link }) => {
+const AdItem = () => {
   return (
     <S.ListItemCard>
-      <S.AdLink href={link} target="_blank" rel="noopener noreferrer">
-        <img src={imgSrc} />
+      <S.AdLink href={"https://www.google.com"} target="_blank" rel="noopener noreferrer">
+        AD
       </S.AdLink>
     </S.ListItemCard>
   );
