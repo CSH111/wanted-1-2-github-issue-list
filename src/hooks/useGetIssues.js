@@ -1,3 +1,4 @@
+import { SORT_PARAMETER } from "../constants";
 import { Issue } from "../context";
 import { useService } from "../context/serviceContext";
 import { deleteISOTime } from "../utils";
@@ -8,7 +9,7 @@ const useGetIssues = () => {
   const dispatch = Issue.useDispatch();
   const { getIssues } = useService();
 
-  return async (pageToRender = 1, sortOption = "comments", sortChanged) => {
+  return async (pageToRender = 1, sortOption = SORT_PARAMETER.comments, sortChanged) => {
     if (!sortChanged) {
       dispatch({ type: "GET_ISSUES_PENDING" });
     }

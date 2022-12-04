@@ -12,6 +12,7 @@ import {
   IssueList,
   IssueListItem,
 } from "../components/Home";
+import { SORT_PARAMETER } from "../constants";
 import { Issue } from "../context";
 import { useGetIssues, useInfiniteScroll, useUpdateEffect } from "../hooks";
 import { isAdTurn } from "../utils";
@@ -24,12 +25,14 @@ const Home = () => {
   const firstPageNumber = 1;
 
   useEffect(() => {
-    if (sortOption && !issuesData.length) {
+    const isURLAccessWithSearchParams = sortOption && !issuesData.length;
+    const isAppAccess = sortOption && issuesData.length;
+    if (isURLAccessWithSearchParams) {
       getIssues(firstPageNumber, sortOption, true);
       return;
     }
-    if (sortOption) return;
-    setParams({ sort: "comments" });
+    if (isAppAccess) return;
+    setParams({ sort: SORT_PARAMETER.comments });
   }, []);
 
   useUpdateEffect(() => {
