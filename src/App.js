@@ -1,17 +1,24 @@
-import { Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
-import { Layout } from "./components/Layout";
-import { Detail, Home } from "./pages";
+import { Issue, Service } from "./context";
+import AppRouter from "./Router";
+import { AxiosClient, createIssueService, URL } from "./service";
+import { GlobalStyles, primaryTheme } from "./styles";
+
+const client = new AxiosClient(URL.API);
+const issueService = createIssueService(client);
 
 function App() {
   return (
     <>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/:issueNumber" element={<Detail />} />
-        </Route>
-      </Routes>
+      <ThemeProvider theme={primaryTheme}>
+        <GlobalStyles />
+        <Service.Provider services={issueService}>
+          <Issue.Provider>
+            <AppRouter />
+          </Issue.Provider>
+        </Service.Provider>
+      </ThemeProvider>
     </>
   );
 }

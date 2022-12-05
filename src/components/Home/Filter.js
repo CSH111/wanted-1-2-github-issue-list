@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { SORT_PARAMETER } from "../../constants";
+
 const Filter = () => {
   const selectArr = [
     { value: SORT_PARAMETER.comments, text: "많은 코멘트" },
