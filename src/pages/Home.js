@@ -39,8 +39,9 @@ const Home = () => {
   }, [sortOption]);
 
   useInfiniteScroll(() => {
+    if (isLoading) return;
     getIssues(pageToRender, sortOption);
-  }, [pageToRender, sortOption]);
+  }, [pageToRender, sortOption, isLoading]);
 
   if (isError) {
     return (

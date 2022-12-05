@@ -31,5 +31,7 @@ export default Filter;
 
 const StyledSelect = styled.select`
   align-self: flex-end;
+  min-width: 120px;
+  padding: 4px 8px;
   border-radius: 5px;
 `;
