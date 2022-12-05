@@ -12,7 +12,14 @@ const CommentItem = ({ avatar, user, date, body }) => {
         <div>{date}</div>
       </S.CommentHeader>
       <S.CommentBody>
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            img: ({ ...props }) => <img style={{ maxWidth: "100%" }} {...props} alt="" />,
+          }}
+        >
+          {body}
+        </ReactMarkdown>
       </S.CommentBody>
     </S.CommentItem>
   );

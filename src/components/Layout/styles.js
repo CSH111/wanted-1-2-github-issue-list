@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.bgColor.lightGray};
-  max-width: 800px;
+  max-width: 1000px;
   min-height: 100vh;
   margin: 0 auto;
   padding: 20px;

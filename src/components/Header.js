@@ -12,6 +12,6 @@ export default Header;
 
 const StyledHeader = styled.header`
   h1 {
-    margin: 10px 0;
+    margin: 0;
   }
 `;

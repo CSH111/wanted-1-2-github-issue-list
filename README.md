@@ -2,7 +2,7 @@
 
 ## 배포주소
 
-https://shiny-parfait-47e153.netlify.app/
+https://chosungho-react-issues.netlify.app/
 
 ## 이슈 list - context API 이용
 
@@ -13,9 +13,7 @@ const IssueCtxProvider = ({ children }) => {
   const [issueData, setIssueData] = useState([]);
 
   return (
-    <IssueContext.Provider value={{ issueData, setIssueData }}>
-      {children}
-    </IssueContext.Provider>
+    <IssueContext.Provider value={{ issueData, setIssueData }}>{children}</IssueContext.Provider>
   );
 };
 ```
