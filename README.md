@@ -1,158 +1,66 @@
-# GitHub
+# React GitHub Issues
 
 ## 배포주소
 
 https://chosungho-react-issues.netlify.app/
 
-## 이슈 list - context API 이용
 
-```jsx
-// context/issueContext.js
+## 프로젝트 소개
+- React github의 이슈를 조회할 수 있는 React.js 토이프로젝트입니다.
+- 이슈 목록 및 상세 페이지로 구성되어있습니다.
 
-const IssueCtxProvider = ({ children }) => {
-  const [issueData, setIssueData] = useState([]);
+## 기능 소개
+### 무한스크롤
+![infinitScroll](https://user-images.githubusercontent.com/105113833/205701089-b6d47835-334a-4ec7-892f-4ae1c86307da.gif)
+- 페이지 하단을 감지해 api 요청을 추가적으로 보내어 리스트를 추가합니다.
+  <details>
+  <summary>코드</summary>
 
-  return (
-    <IssueContext.Provider value={{ issueData, setIssueData }}>{children}</IssueContext.Provider>
-  );
-};
-```
+  ```jsx
+  // src/pages/Home.js
+  import { useInfiniteScroll } from "../hooks";
+  
+  const Home = () => {
+  //...
+    useInfiniteScroll(() => {
+      if (isLoading) return;
+      getIssues(pageToRender, sortOption);
+    }, [pageToRender, sortOption, isLoading]);
+  //...
+  ```
+  ```jsx
+  //src/hooks/useInfiniteScroll.js
+  import { isEndOfPage } from "../utils";
+  
+  const useInfiniteScroll = (callback, deps = []) => {
+    useEffect(() => {
+      const delayTime = 200;
+      let timer;
+      const debounce = () => {
+        if (timer) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+          if (isEndOfPage()) {
+            callback();
+          }
+        }, delayTime);
+      };
+      window.addEventListener("scroll", debounce);
+      return () => {
+        window.removeEventListener("scroll", debounce);
+      };
+    }, [...deps]);
+  };
+  ```
+  
+  ```js
+  // src/utils/isEndOfPage.js
+  const isEndOfPage = (margin = 300) => window.scrollY + window.innerHeight >= document.body.offsetHeight - margin;
+  ```
 
-```jsx
-// pages/Home/lissueList.js
+  </details>
 
-const { issueData, setIssueData } = useIssueContext();
-const getData = async () => {
-  // if (pageNumber !== 1) {
-  //   setIsAdditionalLoading(true);
-  // }
-  try {
-    const res = await axios.get(
-      `https://api.github.com/repos/angular/angular-cli/issues?sort=comments&per_page=8&page=${pageNumber}`
-    );
-
-    const newDataArr = res.data.map((obj) => ({
-      date: obj.created_at.split("T")[0],
-      title: obj.title,
-      user: obj.user.login,
-      number: obj.number,
-      comments: obj.comments,
-      id: obj.id,
-    }));
-    setIssueData((prev) => [...prev, ...newDataArr]);
-    // setisInitialLoading(false);
-    // setIsAdditionalLoading(false);
-  } catch (err) {
-    setIsError(true);
-  }
-};
-
-useEffect(() => {
-  getData();
-}, [pageNumber]);
-```
-
-- 이슈데이터를 context에 담아 출력합니다.
-
-## 무한스크롤
-
-```jsx
-// pages/Home/lissueList.js
-
-useEffect(() => {
-  window.addEventListener("scroll", handleScroll);
-});
-
-const handleScroll = () => {
-  if (window.scrollY + window.innerHeight >= document.body.offsetHeight) {
-    setPageNumber((num) => num + 1);
-  }
-};
-
-useEffect(() => {
-  getData();
-}, [pageNumber]);
-
-const getData = async () => {
-  if (pageNumber !== 1) {
-    setIsAdditionalLoading(true);
-  }
-  try {
-    const res = await axios.get(
-      `https://api.github.com/repos/angular/angular-cli/issues?sort=comments&per_page=8&page=${pageNumber}`
-    );
-  //... 생략
-
-```
-
-- `window.scrollY + window.innerHeight >= document.body.offsetHeight` 이라면 스크롤의 마지막임을 뜻합니다.
-- 스크롤 끝이라면 `pageNumber`를 증가시키고 `getData()`함수를 재실행합니다. -`getData` 함수는 `pageNumber`따라 api요청 및 새로운 데이터를 받아옵니다.
-
-## 로딩표시
-
-```jsx
-// pages/Home/lissueList.js
-
-  const [isInitialLoading, setisInitialLoading] = useState(true);
-  const [isAdditionalLoading, setIsAdditionalLoading] = useState(false);
-
-const getData = async () => {
-  if (pageNumber !== 1) {
-    setIsAdditionalLoading(true);
-  }
-  try {
-    const res = await axios.get(
-    //.. 생략
-    setIssueData((prev) => [...prev, ...newDataArr]);
-    setisInitialLoading(false);
-    setIsAdditionalLoading(false);
-  } catch (err) {
-    setIsError(true);
-  }
-};
-
-useEffect(() => {
-  getData();
-}, [pageNumber]);
-
-// ...생략
-
-  return (
-    <S.List className="list">
-      {isInitialLoading ? (
-        <Spinner className="spinner-main" />
-      ) : (
-       //...lists...
-      )}
-      {isAdditionalLoading ? <Spinner className="spinner-sub" /> : null}
-    </S.List>
-```
-
-- 최초 로딩 혹은 무한스크롤에 의한 로딩에 의해 각각
-  화면 중간 화면 하단에 스피너를 출력합니다.
-
-## 광고 페이지
-
-```jsx
-{
-  issueData.map((issue, idx) => (
-    <>
-      {idx === 4 && (
-        <a href="https://www.wanted.co.kr/" target="_blank" rel="noreferrer">
-          <AdArea />
-        </a>
-      )}
-      <IssueListItem
-        key={issue.id}
-        title={issue.title}
-        user={issue.user}
-        date={issue.date}
-        number={issue.number}
-        comments={issue.comments}
-      />
-    </>
-  ));
-}
-```
-
-상빈님과 같은 방식으로 구현했습니다.
+ ```js
+  console.log("hi")
+ ```
