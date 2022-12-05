@@ -14,9 +14,10 @@ const IssueListItem = ({ title, user, date, number, comments }) => {
         }
         LeftBottom={
           <S.Meta>
-            <S.Data>#{number}</S.Data>
-            <S.Data>opened on {date}</S.Data>
-            <S.Data>by {user}</S.Data>
+            #{number} opened on {date} by {user}
+            {/* <S.Data>#{number}</S.Data>
+            <S.Data>opened on{date}</S.Data>
+            <S.Data>by {user}</S.Data> */}
           </S.Meta>
         }
         Right={
