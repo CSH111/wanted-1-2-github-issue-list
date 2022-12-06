@@ -4,10 +4,29 @@
 
 https://chosungho-react-issues.netlify.app/
 
+<br>
 
 ## 프로젝트 소개
 - Github Rest Api를 활용해 React github의 이슈를 조회할 수 있는 React.js 토이프로젝트입니다.
 - 이슈 목록 및 상세 페이지로 구성되어있습니다.
+
+<br>
+
+## 프로젝트 기간
+2022/10/29 ~ 2022/10/31 기능구현: 이슈목록 및 이슈 조회, 무한스크롤
+
+2022/11/22~2022/12/06 기능추가 및 리팩토링: 필터, 딥링크, DI 패턴 적용 등
+
+<br>
+
+## 기술스택 및 사용 라이브러리
+
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" /> <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">  
+<img src="https://img.shields.io/badge/context--api-e7e7e7?style=for-the-badge">  
+<img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"> <img src="https://img.shields.io/badge/react--markdown-e7e7e7?style=for-the-badge"> <img src="https://img.shields.io/badge/react--syntax--highlighter-e7e7e7?style=for-the-badge"> <img src="https://img.shields.io/badge/react--icons-e7e7e7?style=for-the-badge">  
+<img src="https://img.shields.io/badge/axios-e7e7e7?style=for-the-badge">
+
+<br>
 
 ## 기능 소개
 ### 무한스크롤
@@ -31,12 +50,12 @@ https://chosungho-react-issues.netlify.app/
 ### 필터상태 딥링크
 ![urlAccess](https://user-images.githubusercontent.com/105113833/205875808-6c5a057a-ed59-479e-bef5-be34214e2337.gif)
 - sort 파라미터가 포함된 URL에 접근시 필터가 적용된 상태의 페이지로 접속합니다.  
-<a href="https://chosungho-react-issues.netlify.app/?sort=created" target="_blank">https://chosungho-react-issues.netlify.app/?sort=created(새탭)</a>  
-<a href="https://chosungho-react-issues.netlify.app/?sort=updated" target="_blank">https://chosungho-react-issues.netlify.app/?sort=updated(새탭)</a>
+https://chosungho-react-issues.netlify.app/?sort=created  
+https://chosungho-react-issues.netlify.app/?sort=updated
 
 <br>
 
 ### 디테일 페이지(markdown, syntaxhighlight)
 ![detailPage](https://user-images.githubusercontent.com/105113833/205877294-111a7184-0eb3-4cd7-87c6-38c556072b5e.gif)
-- react-markdown, react-syntax-hightlihgt 라이브러리를 이용해 가독성있게 이슈내용을 읽을 수 있습니다.
+- react-markdown, react-syntax-hightlihgt 라이브러리를 이용해 가독성 좋게 이슈내용을 읽을 수 있습니다.
 
