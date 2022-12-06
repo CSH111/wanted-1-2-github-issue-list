@@ -12,7 +12,7 @@ export const CommentHeader = styled.header`
   border-top-right-radius: 10px;
   padding: 10px 20px;
   display: grid;
-  grid-template-columns: 1.2fr 10fr 2fr;
+  grid-template-columns: 60px 1fr 1fr;
   align-items: center;
 `;
 
@@ -21,6 +21,10 @@ export const ProfileImg = styled.img`
   height: 50px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.bgColor.lightGray};
+`;
+
+export const CreatedDate = styled.div`
+  justify-self: flex-end;
 `;
 
 export const CommentBody = styled.div`

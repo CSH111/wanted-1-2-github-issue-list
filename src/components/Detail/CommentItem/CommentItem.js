@@ -9,7 +9,7 @@ const CommentItem = ({ avatar, user, date, body }) => {
       <S.CommentHeader>
         <S.ProfileImg src={`${avatar}`} alt="profile" />
         <div>{user}</div>
-        <div>{date}</div>
+        <S.CreatedDate>{date}</S.CreatedDate>
       </S.CommentHeader>
       <S.CommentBody>
         <ReactMarkdown remarkPlugins={[remarkGfm]} components={CodeBlock}>

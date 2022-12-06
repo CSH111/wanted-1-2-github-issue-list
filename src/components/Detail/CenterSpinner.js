@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Spinner from "../common/Spinner";
+import { Spinner } from "../common";
 
 const CenterSpinner = () => {
   return (
@@ -12,7 +12,7 @@ const CenterSpinner = () => {
 
 const StyledContainer = styled.div`
   position: absolute;
-  top: 35%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 `;

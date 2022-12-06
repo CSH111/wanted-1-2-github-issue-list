@@ -1,7 +1,13 @@
 import { Link, useParams } from "react-router-dom";
 
 import { ErrorPage } from "../components/common";
-import { CommentItem, CommentList, Container, DetailHeader, Spinner } from "../components/Detail";
+import {
+  CenterSpinner,
+  CommentItem,
+  CommentList,
+  Container,
+  DetailHeader,
+} from "../components/Detail";
 import { useIssueDetail } from "../hooks";
 import { deleteISOTime } from "../utils";
 
@@ -21,7 +27,7 @@ const Detail = () => {
   }
   return (
     <Container>
-      {isLoading && <Spinner />}
+      {isLoading && <CenterSpinner />}
       {!isLoading && (
         <>
           <DetailHeader

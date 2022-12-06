@@ -10,16 +10,14 @@ const issueService = createIssueService(client);
 
 function App() {
   return (
-    <>
-      <ThemeProvider theme={primaryTheme}>
-        <GlobalStyles />
-        <Service.Provider services={issueService}>
-          <Issue.Provider>
-            <AppRouter />
-          </Issue.Provider>
-        </Service.Provider>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={primaryTheme}>
+      <GlobalStyles />
+      <Service.Provider services={issueService}>
+        <Issue.Provider>
+          <AppRouter />
+        </Issue.Provider>
+      </Service.Provider>
+    </ThemeProvider>
   );
 }
 
