@@ -7,7 +7,7 @@ https://chosungho-react-issues.netlify.app/
 <br>
 
 ## 프로젝트 소개
-- Github Rest Api를 활용해 React github의 이슈를 조회할 수 있는 React.js 토이프로젝트입니다.
+- [Github Rest Api](https://docs.github.com/en/rest/issues/issues)를 활용해 React github의 이슈를 조회할 수 있는 React.js 토이프로젝트입니다.
 - 이슈 목록 및 상세 페이지로 구성되어있습니다.
 
 <br>
