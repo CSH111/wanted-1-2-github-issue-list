@@ -12,7 +12,7 @@ const BottomSpinner = () => {
 
 const StyledContainer = styled.div`
   position: absolute;
-  bottom: 20%;
+  bottom: 50px;
   left: 50%;
   transform: translate(-50%, -50%);
 `;
